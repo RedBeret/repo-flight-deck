@@ -200,6 +200,15 @@ select {
     gap: 14px;
 }
 
+.empty-state {
+    padding: 16px;
+    border: 1px dashed rgba(148, 163, 184, 0.22);
+    border-radius: 18px;
+    background: rgba(2, 6, 23, 0.26);
+    color: var(--muted);
+    line-height: 1.7;
+}
+
 .catalog-controls {
     grid-template-columns: 1.3fr 0.8fr;
     margin-bottom: 16px;
@@ -226,6 +235,12 @@ select {
     padding: 0 14px;
     background: rgba(2, 6, 23, 0.45);
     color: #eff6ff;
+}
+
+.control input:focus,
+.control select:focus {
+    outline: 2px solid rgba(121, 225, 255, 0.24);
+    outline-offset: 2px;
 }
 
 .repo-card,
@@ -320,10 +335,48 @@ select {
     grid-template-columns: repeat(3, minmax(0, 1fr));
 }
 
+.summary-copy {
+    margin: 16px 0 8px;
+    color: #d8e7f7;
+    line-height: 1.7;
+}
+
 .signal-card em {
     color: var(--accent);
     font-style: normal;
     font-weight: 700;
+}
+
+.release-columns {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 14px;
+    margin-top: 18px;
+}
+
+.release-card {
+    padding: 16px;
+    border-radius: 18px;
+    border: 1px solid rgba(148, 163, 184, 0.14);
+    background: rgba(2, 6, 23, 0.28);
+}
+
+.release-card h3 {
+    margin: 0 0 12px;
+    font-family: Sora, "IBM Plex Sans", sans-serif;
+    font-size: 18px;
+}
+
+.release-card--blocked {
+    border-color: rgba(248, 113, 113, 0.22);
+}
+
+.release-card--review {
+    border-color: rgba(251, 191, 36, 0.22);
+}
+
+.release-card--done {
+    border-color: rgba(52, 211, 153, 0.22);
 }
 
 .export-button {
@@ -367,7 +420,8 @@ select {
     .content-grid--bottom,
     .metric-grid,
     .comparison-strip,
-    .signal-grid {
+    .signal-grid,
+    .release-columns {
         grid-template-columns: 1fr;
     }
 

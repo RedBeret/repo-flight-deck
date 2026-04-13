@@ -150,6 +150,7 @@ const App = () => {
         const matchesSearch = haystack.includes(deferredSearch.trim().toLowerCase());
         return matchesRisk && matchesSearch;
     });
+    const emptyRepos = filteredRepos.length === 0;
 
     const downloadRiskExport = () => {
         const blob = new Blob([JSON.stringify(riskExport, null, 2)], {
@@ -243,33 +244,39 @@ const App = () => {
                             </select>
                         </label>
                     </div>
-                    <div className="repo-list">
-                        {filteredRepos.map((repo) => (
-                            <button
-                                key={repo.id}
-                                className={`repo-card${repo.id === detail.id ? " is-active" : ""}`}
-                                onClick={() => setSelectedRepoId(repo.id)}
-                                type="button"
-                            >
-                                <div className="repo-card__top">
-                                    <div>
-                                        <strong>{repo.name}</strong>
-                                        <span>{repo.team}</span>
+                    {emptyRepos ? (
+                        <div className="empty-state">
+                            No repositories match the current search and risk filter.
+                        </div>
+                    ) : (
+                        <div className="repo-list">
+                            {filteredRepos.map((repo) => (
+                                <button
+                                    key={repo.id}
+                                    className={`repo-card${repo.id === detail.id ? " is-active" : ""}`}
+                                    onClick={() => setSelectedRepoId(repo.id)}
+                                    type="button"
+                                >
+                                    <div className="repo-card__top">
+                                        <div>
+                                            <strong>{repo.name}</strong>
+                                            <span>{repo.team}</span>
+                                        </div>
+                                        <span className={`badge badge--${repo.risk}`}>
+                                            {repo.risk}
+                                        </span>
                                     </div>
-                                    <span className={`badge badge--${repo.risk}`}>
-                                        {repo.risk}
-                                    </span>
-                                </div>
-                                <p>{repo.summary}</p>
-                                <div className="repo-card__meta">
-                                    <span>health {repo.health}</span>
-                                    <span>{repo.openPrs} PRs</span>
-                                    <span>{repo.securityAlerts} alerts</span>
-                                    <span>{repo.releaseReady ? "ready" : "not ready"}</span>
-                                </div>
-                            </button>
-                        ))}
-                    </div>
+                                    <p>{repo.summary}</p>
+                                    <div className="repo-card__meta">
+                                        <span>health {repo.health}</span>
+                                        <span>{repo.openPrs} PRs</span>
+                                        <span>{repo.securityAlerts} alerts</span>
+                                        <span>{repo.releaseReady ? "ready" : "not ready"}</span>
+                                    </div>
+                                </button>
+                            ))}
+                        </div>
+                    )}
                 </article>
 
                 <article className="panel">
@@ -296,6 +303,7 @@ const App = () => {
                             <strong>{releasePacket.securityAlertCount}</strong>
                         </div>
                     </div>
+                    <p className="summary-copy">{releasePacket.summary}</p>
                     <p className="hero-copy">{riskExport.executiveSummary}</p>
                     <div className="signal-grid">
                         {detail.signals.map((signal) => (
@@ -307,6 +315,32 @@ const App = () => {
                                 </em>
                             </div>
                         ))}
+                    </div>
+                    <div className="release-columns">
+                        <div className="release-card release-card--blocked">
+                            <h3>Blocked items</h3>
+                            <ul className="simple-list simple-list--stacked">
+                                {releasePacket.blockedItems.map((item) => (
+                                    <li key={item}>{item}</li>
+                                ))}
+                            </ul>
+                        </div>
+                        <div className="release-card release-card--review">
+                            <h3>Needs review</h3>
+                            <ul className="simple-list simple-list--stacked">
+                                {releasePacket.reviewItems.map((item) => (
+                                    <li key={item}>{item}</li>
+                                ))}
+                            </ul>
+                        </div>
+                        <div className="release-card release-card--done">
+                            <h3>Already done</h3>
+                            <ul className="simple-list simple-list--stacked">
+                                {releasePacket.doneItems.map((item) => (
+                                    <li key={item}>{item}</li>
+                                ))}
+                            </ul>
+                        </div>
                     </div>
                 </article>
             </section>

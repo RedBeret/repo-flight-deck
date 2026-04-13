@@ -2,6 +2,8 @@
 
 Repo Flight Deck is a full-stack control center for engineering teams that need a fast read on repository health, CI status, security alerts, release readiness, and risky pull requests.
 
+![Repo Flight Deck preview](docs/preview.svg)
+
 This project is designed to show the developer-platform and internal-tooling side of the portfolio:
 
 - operational dashboards for software teams
@@ -16,6 +18,13 @@ This project is designed to show the developer-platform and internal-tooling sid
 - Pull request board with ownership, risk, and merge blockers
 - Security alert panel and release-readiness checklist
 - Exportable JSON risk packet for handoff or review
+
+## What This Demonstrates
+
+- Translating messy engineering signals into a clear decision-ready dashboard
+- Designing APIs for repo health, release gating, and risk summaries
+- Building internal-tool UX that feels credible for platform and developer-experience teams
+- Presenting software delivery status in a way that is readable under pressure
 
 ## Stack
 
