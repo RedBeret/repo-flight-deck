@@ -233,6 +233,38 @@ select {
     line-height: 1.7;
 }
 
+.clear-filters-button {
+    display: block;
+    margin-top: 10px;
+    padding: 0;
+    background: none;
+    border: none;
+    color: var(--accent);
+    font-size: 13px;
+    cursor: pointer;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+}
+
+.clear-filters-button:hover {
+    opacity: 0.75;
+}
+
+.inline-text-button {
+    background: none;
+    border: none;
+    padding: 0;
+    color: var(--accent);
+    font-size: inherit;
+    cursor: pointer;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+}
+
+.inline-text-button:hover {
+    opacity: 0.75;
+}
+
 .catalog-controls {
     grid-template-columns: 1.3fr 0.8fr;
     margin-bottom: 16px;
