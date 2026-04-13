@@ -154,6 +154,12 @@ const App = () => {
         return matchesRisk && matchesSearch;
     });
     const emptyRepos = filteredRepos.length === 0;
+    const hasActiveFilters = search.trim() !== "" || riskFilter !== "all";
+
+    const clearFilters = () => {
+        setSearch("");
+        setRiskFilter("all");
+    };
 
     const downloadRiskExport = () => {
         const blob = new Blob([JSON.stringify(riskExport, null, 2)], {
@@ -246,10 +252,26 @@ const App = () => {
                                 ))}
                             </select>
                         </label>
+                        {hasActiveFilters ? (
+                            <button
+                                className="clear-filters-button"
+                                onClick={clearFilters}
+                                type="button"
+                            >
+                                Clear filters
+                            </button>
+                        ) : null}
                     </div>
                     {emptyRepos ? (
                         <div className="empty-state">
-                            No repositories match the current search and risk filter.
+                            No repositories match the current filters.{" "}
+                            <button
+                                className="inline-text-button"
+                                onClick={clearFilters}
+                                type="button"
+                            >
+                                Clear filters
+                            </button>
                         </div>
                     ) : (
                         <div className="repo-list">
