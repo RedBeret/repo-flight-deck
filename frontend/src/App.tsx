@@ -76,6 +76,7 @@ const App = () => {
     const [riskFilter, setRiskFilter] = useState("all");
     const [search, setSearch] = useState("");
     const [error, setError] = useState("");
+    const [loadingDetail, setLoadingDetail] = useState(false);
     const deferredSearch = useDeferredValue(search);
 
     useEffect(() => {
@@ -101,6 +102,7 @@ const App = () => {
             return;
         }
 
+        setLoadingDetail(true);
         Promise.all([
             fetch(`/api/repos/${selectedRepoId}`).then((response) => {
                 if (!response.ok) {
@@ -133,7 +135,8 @@ const App = () => {
             })
             .catch(() =>
                 setError("Repo detail could not be loaded. Refresh and try again.")
-            );
+            )
+            .finally(() => setLoadingDetail(false));
     }, [selectedRepoId]);
 
     if (error) {
@@ -279,15 +282,18 @@ const App = () => {
                     )}
                 </article>
 
-                <article className="panel">
+                <article className={`panel${loadingDetail ? " panel--loading" : ""}`}>
                     <div className="panel-heading panel-heading--split">
                         <div>
                             <p className="eyebrow">Release packet</p>
                             <h2>{detail.name}</h2>
                         </div>
-                        <button className="export-button" onClick={downloadRiskExport} type="button">
-                            Export risk packet
-                        </button>
+                        <div className="panel-heading__actions">
+                            {loadingDetail ? <span className="loading-badge">Refreshing...</span> : null}
+                            <button className="export-button" onClick={downloadRiskExport} type="button">
+                                Export risk packet
+                            </button>
+                        </div>
                     </div>
                     <div className="comparison-strip">
                         <div className="comparison-card">

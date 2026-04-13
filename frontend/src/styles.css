@@ -186,6 +186,30 @@ select {
     align-items: flex-start;
 }
 
+.panel-heading__actions {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-shrink: 0;
+}
+
+.loading-badge {
+    font-size: 12px;
+    color: var(--muted);
+    letter-spacing: 0.04em;
+    animation: pulse 1.4s ease-in-out infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.4; }
+}
+
+.panel--loading {
+    opacity: 0.7;
+    transition: opacity 0.2s ease;
+}
+
 .panel h2 {
     font-size: 30px;
     line-height: 1.08;
