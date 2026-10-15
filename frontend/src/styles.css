@@ -186,6 +186,30 @@ select {
     align-items: flex-start;
 }
 
+.panel-heading__actions {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-shrink: 0;
+}
+
+.loading-badge {
+    font-size: 12px;
+    color: var(--muted);
+    letter-spacing: 0.04em;
+    animation: pulse 1.4s ease-in-out infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.4; }
+}
+
+.panel--loading {
+    opacity: 0.7;
+    transition: opacity 0.2s ease;
+}
+
 .panel h2 {
     font-size: 30px;
     line-height: 1.08;
@@ -207,6 +231,38 @@ select {
     background: rgba(2, 6, 23, 0.26);
     color: var(--muted);
     line-height: 1.7;
+}
+
+.clear-filters-button {
+    display: block;
+    margin-top: 10px;
+    padding: 0;
+    background: none;
+    border: none;
+    color: var(--accent);
+    font-size: 13px;
+    cursor: pointer;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+}
+
+.clear-filters-button:hover {
+    opacity: 0.75;
+}
+
+.inline-text-button {
+    background: none;
+    border: none;
+    padding: 0;
+    color: var(--accent);
+    font-size: inherit;
+    cursor: pointer;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+}
+
+.inline-text-button:hover {
+    opacity: 0.75;
 }
 
 .catalog-controls {
